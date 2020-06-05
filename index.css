@@ -53,8 +53,7 @@ table {
 body {
     padding-top: 15%;
     padding-bottom: 15%;
-    background-image: img src="/images/laptop-computer-on-wooden-table.jpg" 
-    alt="Computer sitting on modern desk" style="width:128px;height:128px;";
+    background-color: #cccccc;
     font-family: 'Rosario', sans-serif;
 }
 
@@ -93,7 +92,7 @@ header, .photo-credit {
     position: fixed;        
     background: #333;
     padding: 10px 0;
-    color: #fff;
+    color: whitesmoke;
 }
 
 .quiz-about-panel {
