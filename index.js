@@ -1,19 +1,21 @@
 'use strict';
 
 let i = 0;
+let questionNumber = i + 1;
+let score = 0;
 
 function generateWelcomePage() {
     console.log("Generating getting started page");
   
     return `
-            <div class="starter-page">
-                <div class="quiz-about-panel">
-                    <h2>macOS® Basics</h2>
-                    <h3>Photos App</h3>
-                </div>
-                <button id="get-started js-get-started">Get Started</button>
-            </div>`;
-  }
+        <div class="landing-zone js-landing-zone">
+            <div class="quiz-about-panel">
+                <h2>macOS® Basics</h2>
+                <h3>Photos App</h3>
+            </div>
+            <button class="get-started-button js-get-started-button">Get Started</button>
+        </div>`;
+}
 
 function getStarted() {
     console.log('`getStarted` ran')
@@ -21,43 +23,57 @@ function getStarted() {
     $('.js-landing-zone').html(welcomePage);    
 }
 
-function generateShoppingItemsString(shoppingList) {
-    console.log("Generating shopping list element");
-  
-    const items = shoppingList.map((item) => generateItemElement(item));
-    
-    return items.join("");
-  }
+function generateQuestion() {
+    let quizChef = $(`
+        <form class="js-generated-quiz">
+            <fieldset>
+                <legend>${STORE[i].question}
+                </legend>
+            </fieldset>
+        </form>`)
 
-function generateQuestionDisplay(questionKeys) {
+    let cookIngredients = $(quizChef).find('fieldset');
+
+    STORE[i].choices.forEach(function (answerValue, answerIndex) {
+        $(`
+        <input type="radio" id="${answerIndex}" name="answer" value=${answerValue}" required>
+        <label for="${answerIndex}">${answerValue}</label>
+
+      `).appendTo(cookIngredients);
+    });
+
+    $(`<button type="submit" class="next-question" value="Submit">Submit</button>`).appendTo(cookIngredients);
+    $(`<ul class="entire-status-bar">
+                <li class="status-bar-third" id="right-wrong">Question:
+                    <span class="questionNumber">${questionNumber}</span>/10</li>
+                <li class="status-bar-third" id="empty-third"></li>
+                </li>
+                <li class="status-bar-third">Score:
+                    <span class="score">${score}</span>
+                </li>
+          </ul>`).appendTo(cookIngredients)
+
+    return quizChef;
+}
+
+function generateQuestionDisplay() {
     console.log('`questionDisplayInterface` ran')
-    for(let j=0; j < STORE[i].choices[j]; j++){
-        const question = questionKeys[i].map((item) => generateQuestion(item));
+    if (i < STORE.length) {
+        return generateQuestion();
+    } else {
+        $('.js-generated-quiz').hide();
+        finalScore();
+        $('.questionNumber').text(10);
     }
-    return question.join("");
 }
 
 function quizMain() {
     console.log('`quizMain` ran')
-    $('#js-get-started').on('click', function() {
-        alert("This is a test of Suck Youuuu")
-        const renderedQuestion = generateQuestionDisplay(STORE);
-        $('.js-landing-zone').html(renderedQuestion);   
+    $('.js-landing-zone').on('click', '.js-get-started-button', function(event) {
+        const renderedQuestion = generateQuestionDisplay();
+        $('.js-landing-zone').html(renderedQuestion);
     })
 }
-
-// function questionResult() {
-//     $('#js-shopping-list-form').submit(function(event) {
-//       event.preventDefault();
-//       console.log('`handleNewItemSubmit` ran');
-//       const newItemName = $('.js-shopping-list-entry').val();
-//       $('.js-shopping-list-entry').val('');
-//       addItemToShoppingList(newItemName);
-//       renderShoppingList();
-//     });
-//   }
-  
-
 
 function questionResult() {
     console.log('`questionResult` ran')
@@ -69,8 +85,11 @@ function restart() {
 
 function quizComplete() {
     getStarted();
+//complete
     quizMain();
+//complete
     questionResult();
+//in-progress
     restart();
 }
 
