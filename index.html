@@ -1,111 +1,33 @@
 <!--Splash/Start Screen-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photos App Quiz</title>
     <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="stylesheet" href="index.js">
-    <link href="https://fonts.googleapis.com/css2?family=Rosario:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rosario" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <h1>Photos App Basics</h1>
-    </header>
+<main>
 
-<!--Splash/Start Screen-->
-
-        <div class="starter-page">
-            <div class="quiz-about-panel">
-                <h2>macOS® Basics</h2>
-                <h3>Photos App</h3>
-            </div>
-            <button id="get-started">Get Started</button>
+    <body>
+        <header>
+            <h1>Photos App Basics</h1>
+        </header>
+        <div class="landing-zone js-landing-zone">
         </div>
-
-<!--New Question-->
-<br>
-<br>
-        <div class="js-quiz-area" id="new-question">
-            <div>
-                <h4>
-                    Question relating to title of exam.
-                </h4>
-            </div>
-            <div>
-
-
-<!--Link to JS, action=""-->
-                <form class="quiz-form">
-                    <input type="radio" id="answer1.1" name="answera" value="false">
-                    <label for="answer1.1">Answer1.1</label><br>
-                    <input type="radio" id="answer2.1" name="answera" value="false">
-                    <label for="answer2.1">Answer2.1</label><br>
-                    <input type="radio" id="answer3.1" name="answera" value="false">
-                    <label for="answer3.1">Answer3.1</label><br>
-                    <input type="radio" id="answer4.1" name="answera" value="false">
-                    <label for="answer4.1">Answer4.1</label><br>
-                </form>
-                <button type="submit" class="next-question" value="Submit">Submit</button>
-            </div>
-
-            <div class="status-bar">
-                <div class="progress">
-                    <span>Progress x/10</span>
-                </div>
-                <div class="invisible">
-                    <span>DO NOT SHOW IN END</span>
-                </div>
-                <div class="correct-score">
-                    <span>Correct: z</span>
-                </div>
-            </div>
+        <div class="photo-credit"> Photo by <a
+                href="https://burst.shopify.com/@noreefly?utm_campaign=photo_credit&amp;utm_content=Browse+Free+HD+Images+of+Laptop+Computer+On+Wooden+Table&amp;utm_medium=referral&amp;utm_source=credit">Patchanu
+                Noree</a> from <a
+                href="https://burst.shopify.com/technology?utm_campaign=photo_credit&amp;utm_content=Browse+Free+HD+Images+of+Laptop+Computer+On+Wooden+Table&amp;utm_medium=referral&amp;utm_source=credit">Burst</a>
         </div>
-
-
-<!--Question Wrong/Correct-->
-<br>
-<br>
-
-        <div class="js-quiz-area"id="question-result">
-            <div>
-                <h4>
-                    Question relating to title of exam.
-                </h4>
-            </div>
-            <div>
-
-            <!--Link to JS, action=""-->   
-                <form class="quiz-form">
-                    <input type="radio" id="answer1.2" name="answer" value="false">
-                    <label for="answer1.2">Answer1.2</label><br>
-                        <div class="right-wrong">
-                            <span>CORRECT!</span>
-                            <span>OR That is incorrect. The correct answer is Answer2</span><br>
-                        </div>
-                    <input type="radio" id="answer2.2" name="answer" value="false">
-                    <label for="answer2.2">Answer2.2</label><br>
-                    <input type="radio" id="answer3.2" name="answer" value="false">
-                    <label for="answer3.2">Answer3.2</label><br>
-                    <input type="radio" id="answer4.2" name="answer" value="false">
-                    <label for="answer4.2">Answer4.2</label><br>
-                </form>
-                <button type="submit" class="next-question" value="Submit">Submit</button>
-            </div>
-
-            <div class="status-bar">
-                    <span id="left-progress">Progress x/10</span>
-                    <span id="center-invisible">DO NOT SHOW IN END</span>
-                    <span id="right-correct-score">Correct: z</span>
-            </div>
-        </div>
-
-        <div class="photo-credit"> Photo by <a href="https://burst.shopify.com/@noreefly?utm_campaign=photo_credit&amp;utm_content=Browse+Free+HD+Images+of+Laptop+Computer+On+Wooden+Table&amp;utm_medium=referral&amp;utm_source=credit">Patchanu Noree</a> from <a href="https://burst.shopify.com/technology?utm_campaign=photo_credit&amp;utm_content=Browse+Free+HD+Images+of+Laptop+Computer+On+Wooden+Table&amp;utm_medium=referral&amp;utm_source=credit">Burst</a></div>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous"></script>
-    <script src=questions.js></script>
-    <script src=index.js></script>
+</main>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src=question-key.js></script>
+<script src=index.js></script>
 </body>
+
 </html>
