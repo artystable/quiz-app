@@ -117,9 +117,16 @@ button:hover {
     background-color: lightseagreen;
 }
 
-.status-bar, .status-third {
-    display: flexbox;
-    flex-direction: row;
+.status-bar {
+    overflow: hidden;
+    background-color: rgb(47, 47, 47);
+}
+
+.status-third {
+    display: inline-block;
+    color: 	rgb(255,255,255);
+    text-align: center;
+    padding: 16px;
 }
 
 .right-wrong {
