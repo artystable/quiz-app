@@ -21,7 +21,7 @@ function getStarted() {
     const welcomePage = generateWelcomePage();
     $('.js-landing-zone').html(welcomePage);
     
-    $('.js-landing-zone').on('click', '.js-get-started-button', function(event) {
+    $('.js-landing-zone').on('click', '.js-get-started-button', function() {
         const renderedQuestion = generateQuestionDisplay();
         $('.js-landing-zone').html(renderedQuestion);
     })
@@ -30,8 +30,8 @@ function getStarted() {
 function generateQuestion() {
     console.log("Generating all of question form");
     let quizChef = $(`
-        <form class="js-generated-quiz">
-            <fieldset class="js-landing-zone">
+        <form class="js-generated-quiz ram">
+            <fieldset class="js-landing-zone ram">
                 <legend>${STORE[i].question}
                 </legend>
             </fieldset>
@@ -72,51 +72,69 @@ function generateQuestionDisplay() {
 function quizMain() {
     console.log('`quizMain` ran')
     $('.js-landing-zone').on('click', '.js-submit-answer', function() {
-        const renderedQuestion = generateQuestionDisplay();
-        $('.js-landing-zone').html(renderedQuestion);
+        // $('.js-landing-zone').hide();
+        // $('.js-landing-zone').show();
+        const nextQuestion = generateQuestionDisplay();
+        $('.js-landing-zone').html(nextQuestion);
     })
-    
 }
 
 function correct() {
     console.log('`correct` ran')
-    i ++;
+    if (i < 10) {
+        i++
+    } else {
+        stop
+    }
     console.log(i)
 }
 
 function incorrect() {
     console.log('`incorrect` ran')
-    i ++;
+    if (i < 10) {
+        i++
+    } else {
+        stop
+    }
+    console.log(i)
 }
 
 function questionResult() {
     console.log('`questionResult` ran')
     $('.js-landing-zone').on('submit', '.js-generated-quiz', function(e) {
         e.preventDefault()
-        const test = $('input:checked').val();
-        console.log(test);
+        console.log(STORE[i].answer, "TEST")
+        console.log(i)
         if ($('input:checked').val() === STORE[i].answer) {
             correct();
         } else {
             incorrect();
         }
     });
-    
+    quizMain();
 }
-// function questionResult() {
-//     console.log('`questionResult` ran')
-//     $('.js-landing-zone').on('submit', '.js-generated-quiz', function(e) {
-//         e.preventDefault()
-//         if ($('input:checked').val() === STORE[i].answer) {
-//             correct();
-//         } else {
-//             incorrect();
-//         }
-//     });
-// }
+
+function finalScore() {
+    if (score >=8) {
+        alert("you rock!")
+    } else if (score >= 5) {
+        alert("Study!...but you passed")
+    } else {
+    // return `
+    // <div class="landing-zone js-landing-zone">
+    //     <div class="quiz-about-panel">
+    //         <h2>macOS® Basics</h2>
+    //         <h3>Photos App</h3>
+    //     </div>
+    //     <button class="restart-quiz">Restart</button>
+    // </div>`;
+        alert("You failed, please try again")
+    }
+}
 
 function restart() {
     console.log('`restart` ran')
+
 }
 
 function quizComplete() {
