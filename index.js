@@ -6,26 +6,31 @@ let score = 0;
 
 function generateWelcomePage() {
     console.log("Generating getting started page");
-  
     return `
         <div class="landing-zone js-landing-zone">
             <div class="quiz-about-panel">
                 <h2>macOS® Basics</h2>
                 <h3>Photos App</h3>
             </div>
-            <button class="get-started-button js-get-started-button js-submit">Get Started</button>
+            <button class="get-started-button js-get-started-button">Get Started</button>
         </div>`;
 }
 
 function getStarted() {
     console.log('`getStarted` ran')
     const welcomePage = generateWelcomePage();
-    $('.js-landing-zone').html(welcomePage);    
+    $('.js-landing-zone').html(welcomePage);
+    
+    $('.js-landing-zone').on('click', '.js-get-started-button', function(event) {
+        const renderedQuestion = generateQuestionDisplay();
+        $('.js-landing-zone').html(renderedQuestion);
+    })
 }
 
 function generateQuestion() {
+    console.log("Generating all of question form");
     let quizChef = $(`
-        <form class="js-generated-quiz">
+        <form class="js-landing-zone">
             <fieldset class="js-landing-zone">
                 <legend>${STORE[i].question}
                 </legend>
@@ -33,16 +38,13 @@ function generateQuestion() {
         </form>`)
 
     let cookIngredients = $(quizChef).find('fieldset');
-    console.log(cookIngredients, "before")
     STORE[i].choices.forEach(function (answerValue, answerIndex) {
         $(`
-        <input type="radio" id="${answerIndex}" name="answer" value=${answerValue}" required>
+        <input type="radio" id="${answerIndex}" name="answer" value="${answerValue}" required>
         <label for="${answerIndex}">${answerValue}</label>
-        
       `).appendTo(cookIngredients);
     });
-    console.log(cookIngredients, "after")
-    $(`<button type="submit" class="submit js-submit" value="Submit">Submit</button>`).appendTo(cookIngredients);
+    $(`<button type="submit" class="submit js-submit-answer" value="Submit">Submit</button>`).appendTo(cookIngredients);
     $(`<ul class="entire-status-bar">
                 <li class="status-bar-third" id="right-wrong">Question:
                     <span class="questionNumber">${questionNumber}</span>/10</li>
@@ -61,7 +63,7 @@ function generateQuestionDisplay() {
     if (i < STORE.length) {
         return generateQuestion();
     } else {
-        $('.js-generated-quiz').hide();
+        $('.js-landing-zone').hide();
         finalScore();
         $('.questionNumber').text(10);
     }
@@ -69,34 +71,46 @@ function generateQuestionDisplay() {
 
 function quizMain() {
     console.log('`quizMain` ran')
-    $('.js-landing-zone').on('click', '.js-submit', function(event) {
+    $('.js-landing-zone').on('click', '.js-submit-answer', function() {
         const renderedQuestion = generateQuestionDisplay();
         $('.js-landing-zone').html(renderedQuestion);
     })
+    
 }
 
 function correct() {
     console.log('`correct` ran')
-    i += 1;
-    console.log(i)
+    i ++;
 }
 
 function incorrect() {
-    console.log('`correct` ran')
-    let insert = $(`<br><span class="incorrect">That is incorrect, the correct answer is ${STORE[i].answer}</span>`)
-    alert(insert)
+    console.log('`incorrect` ran')
+    i ++;
 }
 
 function questionResult() {
     console.log('`questionResult` ran')
-    $('.js-generated-quiz').on('click', '.js-submit', function() {
-        if ($('input:checked') === STORE[i].answer) {
+    $('.js-landing-zone').on('submit', '.js-submit-answer', function(e) {
+        e.preventDefault()
+        if ($('input:checked').val() === STORE[i].answer) {
             correct();
         } else {
             incorrect();
         }
     });
+
 }
+// function questionResult() {
+//     console.log('`questionResult` ran')
+//     $('.js-landing-zone').on('submit', '.js-generated-quiz', function(e) {
+//         e.preventDefault()
+//         if ($('input:checked').val() === STORE[i].answer) {
+//             correct();
+//         } else {
+//             incorrect();
+//         }
+//     });
+// }
 
 function restart() {
     console.log('`restart` ran')
