@@ -30,7 +30,7 @@ function getStarted() {
 function generateQuestion() {
     console.log("Generating all of question form");
     let quizChef = $(`
-        <form class="js-landing-zone">
+        <form class="js-generated-quiz">
             <fieldset class="js-landing-zone">
                 <legend>${STORE[i].question}
                 </legend>
@@ -44,7 +44,7 @@ function generateQuestion() {
         <label for="${answerIndex}">${answerValue}</label>
       `).appendTo(cookIngredients);
     });
-    $(`<button type="submit" class="submit js-submit-answer" value="Submit">Submit</button>`).appendTo(cookIngredients);
+    $(`<button type="submit" class="submit js-submit-quiz-answer" value="Submit">Submit</button>`).appendTo(cookIngredients);
     $(`<ul class="entire-status-bar">
                 <li class="status-bar-third" id="right-wrong">Question:
                     <span class="questionNumber">${questionNumber}</span>/10</li>
@@ -81,6 +81,7 @@ function quizMain() {
 function correct() {
     console.log('`correct` ran')
     i ++;
+    console.log(i)
 }
 
 function incorrect() {
@@ -90,15 +91,17 @@ function incorrect() {
 
 function questionResult() {
     console.log('`questionResult` ran')
-    $('.js-landing-zone').on('submit', '.js-submit-answer', function(e) {
+    $('.js-landing-zone').on('submit', '.js-generated-quiz', function(e) {
         e.preventDefault()
+        const test = $('input:checked').val();
+        console.log(test);
         if ($('input:checked').val() === STORE[i].answer) {
             correct();
         } else {
             incorrect();
         }
     });
-
+    
 }
 // function questionResult() {
 //     console.log('`questionResult` ran')
